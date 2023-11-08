@@ -6,6 +6,7 @@ const cluster = require('cluster');
 const os = require('os');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const {userRoutes, bookRoutes} = require('./routes');
 const {errorMiddleware} = require('./middleware/errors');
 
 
@@ -53,4 +54,6 @@ if (cluster.isPrimary) {
 	app.use(errorMiddleware);
 
 	// Routes
+    app.use('/api/books',bookRoutes);
+    app.use('/api',userRoutes);
 }
