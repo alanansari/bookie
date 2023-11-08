@@ -1,11 +1,11 @@
-# Student Task Management System
+# Bookie: Book Store
 
 ### Features
 - Authentication: using JWT
 - Authorization: Protected routes for access to resources.
-- Endpoints for Admin Panel and Student Inerface
-- Error Handling
-- Typescript
+- Global Error Handling
+- Rate Limited APIs
+
 
 ### POSTMAN API DOCUMENTATION: [here](https://documenter.getpostman.com/view/24068251/2s9YXiY1rx)
 
