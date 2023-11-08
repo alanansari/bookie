@@ -4,14 +4,15 @@ const otpGenerator = require('otp-generator');
 const mailer = require("../utils/mailer");
 const {User,Otp} = require("../models");
 const { ErrorHandler } = require('../middleware/errors');
+const jv = require("../utils/validation");
 
 module.exports = {
     login : async (req, res, next) => {
         try{
-            let {
-                email,
-                password
-            } = req.body;
+            const body = await jv.loginSchema.validateAsync(req.body);
+
+            const email = body.email.toLowerCase();
+            const password = body.password;
 
             const user = await User.findOne({ email });
             if (!user) 
@@ -36,7 +37,9 @@ module.exports = {
     },
     email : async (req,res,next) => {
             try {
-            const {email} = req.body;
+            const body = await jv.emailSchema.validateAsync(req.body);
+            
+            const email = body.email.toLowerCase();
 
             const oldUser = await User.findOne({
                 email:email.toLowerCase()
@@ -78,7 +81,10 @@ module.exports = {
     },
     signup : async (req,res,next) => {
         try {
-            let {name,email,otp,password} = req.body;
+            let body = await jv.signupSchema.validateAsync(req.body);
+
+            const {name,password,otp} = body;
+            const email = body.email.toLowerCase();
 
             const otpdb = await Otp.findOne({email});
             

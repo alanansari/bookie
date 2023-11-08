@@ -13,5 +13,15 @@ module.exports = {
         email: Joi.string().required().trim().email(),
         password: Joi.string().required(),
         otp: Joi.string().required().length(6)
-    })
+    }),
+    createBookSchema: Joi.object({
+        title: Joi.string().required().trim(),
+        author: Joi.string().required().trim(),
+        summary: Joi.string().required().trim()
+    }),
+    updateBookSchema: Joi.object({
+        title: Joi.string().trim(),
+        author: Joi.string().trim(),
+        summary: Joi.string().trim()
+    }),
 }

@@ -14,6 +14,10 @@ const bookSchema = mongoose.Schema({
         type:String,
         required: true
     },
+    uploadedBy:{
+        type: ObjectId,
+        ref: "user"
+    }
 });
 
 const bookModel = mongoose.model("book",bookSchema);
