@@ -32,7 +32,7 @@ module.exports = {
     },
     getAllBooks: async (req,res,next) => {
         try {
-            const books = await Book.find().populate("uploadedBy");
+            const books = await Book.find().populate("uploadedBy","_id name email");
             const data = {
                 books
             }
@@ -45,7 +45,7 @@ module.exports = {
         try {
             const id = req.params.id;
 
-            const book = await Book.findById(id).populate("uploadedBy");
+            const book = await Book.findById(id).populate("uploadedBy","_id name email");
             if(!book)
                 return next(new ErrorHandler(404,"Book Not Found"));
 

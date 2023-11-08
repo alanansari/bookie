@@ -63,7 +63,7 @@ module.exports = {
                 dateNow = dateNow.getTime()/1000;
                 let otpDate = new Date(oldotp.updatedAt);
                 otpDate = otpDate.getTime()/1000;
-                console.log(dateNow,otpDate)
+
                 if(dateNow<otpDate+10)
                     return next(new ErrorHandler(400,"Wait for 10 seconds to resend mail."));
                 oldotp.otp = mailedOTP;
@@ -89,7 +89,7 @@ module.exports = {
             const otpdb = await Otp.findOne({email});
             
             if(!otpdb)
-                return next(new ErrorHandler(400,"Otp for mail expired resend otp"));
+                return next(new ErrorHandler(400,"Otp for this mail expired resend otp"));
             
             if(otpdb.used)
                 return next(new ErrorHandler(400,"Otp already used"));
@@ -107,8 +107,6 @@ module.exports = {
 
             otpdb.used = true;
             await otpdb.save();
-            
-            console.log(newuser);
 
             const token = jwt.sign({
                 id: newuser._id,

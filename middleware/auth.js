@@ -1,3 +1,7 @@
+const {User} = require("../models");
+const jwt = require("jsonwebtoken");
+const { ErrorHandler } = require('./errors');
+
 const auth = (req, res, next) => {
     try {
       let token = req.header("Authorization");
@@ -13,13 +17,14 @@ const auth = (req, res, next) => {
         const user = await User.findById(id);
 
         if (!user) next(new ErrorHandler(401, "Invalid Authentication"));
-        if (!user.verify) next(new ErrorHandler(401, "User not verified"));
 
         req.user = user;
-        
+
         next();
       });
     } catch (err) {
       return next(err);
     }
   };
+
+  module.exports = auth;

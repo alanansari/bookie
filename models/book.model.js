@@ -12,7 +12,6 @@ const bookSchema = mongoose.Schema({
     },
     summary:{
         type:String,
-        required: true
     },
     uploadedBy:{
         type: ObjectId,

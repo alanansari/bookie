@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const {userRoutes, bookRoutes} = require('./routes');
 const {errorMiddleware} = require('./middleware/errors');
+const PORT = process.env.PORT || 3000;
 
 
 const totalCPUs = os.cpus().length;
@@ -33,8 +34,8 @@ if (cluster.isPrimary) {
     // Connect to MongoDB and Starting the Server
     mongoose.connect(process.env.DB_URI).then(() => {
         console.log("DB Connected");
-        app.listen(process.env.PORT, "0.0.0.0", () => {
-          console.log(`Server is running on port ${process.env.PORT}`);
+        app.listen(PORT, "0.0.0.0", () => {
+          console.log(`Server is running on port ${PORT}`);
         });
     });
 
@@ -54,6 +55,6 @@ if (cluster.isPrimary) {
 	app.use(errorMiddleware);
 
 	// Routes
-    app.use('/api/books',bookRoutes);
-    app.use('/api',userRoutes);
+    app.use('/api/books',bookRoutes,errorMiddleware);
+    app.use('/api',userRoutes,errorMiddleware);
 }

@@ -9,19 +9,19 @@ module.exports = {
         email: Joi.string().required().trim().email()
     }),
     signupSchema : Joi.object({
-        name: Joi.string().required().min(3).max(30),
+        name: Joi.string().required().min(2).max(50),
         email: Joi.string().required().trim().email(),
-        password: Joi.string().required(),
+        password: Joi.string().required().min(6),
         otp: Joi.string().required().length(6)
     }),
     createBookSchema: Joi.object({
-        title: Joi.string().required().trim(),
-        author: Joi.string().required().trim(),
+        title: Joi.string().required().trim().min(1),
+        author: Joi.string().required().trim().min(2).max(50),
         summary: Joi.string().required().trim()
     }),
     updateBookSchema: Joi.object({
-        title: Joi.string().trim(),
-        author: Joi.string().trim(),
+        title: Joi.string().trim().min(1),
+        author: Joi.string().trim().min(1),
         summary: Joi.string().trim()
-    }),
+    })
 }
