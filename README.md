@@ -9,7 +9,7 @@
 
 ### POSTMAN API DOCUMENTATION: [here](https://documenter.getpostman.com/view/24068251/2s9YXiY1rx)
 
-### Hosted Link: [here](https://bookie-9aci.onrender.com/)
+### AWS EC2 VM API Endpoint: [https://bookie.devalan.tech/](https://bookie.devalan.tech/)
 
 ## RUNNING THE SERVER
 
